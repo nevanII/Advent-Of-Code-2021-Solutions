@@ -1,0 +1,79 @@
+Imports System.Console
+Module Module1
+    Dim command, TextLine, numIncPre As String
+    Dim numInC As Integer
+    Sub Main()
+        part1()
+        part2()
+        ReadKey()
+    End Sub
+    Sub part1()
+        Dim TLSplit(1) As String
+        Dim depth, horizontal As Integer
+
+        Dim FILE_NAME As String = "N:\ADVENTOFCODEDAY2.txt"
+        If System.IO.File.Exists(FILE_NAME) = True Then
+            Dim objReader As New System.IO.StreamReader(FILE_NAME)
+            Do While objReader.Peek() <> -1
+                TextLine = objReader.ReadLine() & vbNewLine
+                WriteLine(TextLine)
+                'Empties The Array
+                Array.Clear(TLSplit, 0, TLSplit.Length)
+
+                TLSplit = Split(TextLine)
+
+                command = TLSplit(0)
+                WriteLine(command)
+                numIncPre = TLSplit(1)
+                Integer.TryParse(numIncPre, numInC)
+                WriteLine(numInC)
+
+                If command = "forward" Then
+                    horizontal += numInC
+                ElseIf command = "down" Then
+                    depth += numInC
+                Else
+                    depth -= numInC
+                End If
+            Loop
+            WriteLine(horizontal * depth)
+        Else
+            WriteLine("File Does Not Exist")
+        End If
+
+    End Sub
+    Sub part2()
+        Dim TLSplit(1) As String
+        Dim depth, horizontal, aim As Integer
+
+        Dim FILE_NAME As String = "N:\ADVENTOFCODEDAY2.txt"
+        If System.IO.File.Exists(FILE_NAME) = True Then
+            Dim objReader As New System.IO.StreamReader(FILE_NAME)
+            Do While objReader.Peek() <> -1
+                TextLine = objReader.ReadLine() & vbNewLine
+                WriteLine(TextLine)
+                'Empties The Array
+                Array.Clear(TLSplit, 0, TLSplit.Length)
+
+                TLSplit = Split(TextLine)
+
+                command = TLSplit(0)
+                numIncPre = TLSplit(1)
+                Integer.TryParse(numIncPre, numInC)
+
+                If command = "forward" Then
+                    horizontal += numInC
+                    depth += aim * numInC
+                ElseIf command = "down" Then
+                    aim += numInC
+                Else
+                    aim -= numInC
+                End If
+            Loop
+            WriteLine(horizontal * depth)
+        Else
+            WriteLine("File Does Not Exist")
+        End If
+
+    End Sub
+End Module
