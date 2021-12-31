@@ -1,0 +1,69 @@
+Imports System.Console
+Module Module1
+    Dim TextLine As String
+    Dim CTL1, CTL2 As Integer
+    Dim noOfIncreases As Integer
+    Sub Main()
+        part1()
+        part2()
+    End Sub
+    Sub part1()
+        Dim FILE_NAME As String = "N:\ADVENTOFCODEDAY1.txt"
+        CTL1 = 198
+        CTL2 = 208
+        If System.IO.File.Exists(FILE_NAME) = True Then
+            Dim objReader As New System.IO.StreamReader(FILE_NAME)
+            Do While objReader.Peek() <> -1
+                TextLine = objReader.ReadLine() & vbNewLine
+                Integer.TryParse(TextLine, CTL2)
+                WriteLine(CTL2)
+                If CTL2 > CTL1 Then
+                    noOfIncreases += 1
+                    CTL1 = CTL2
+                Else
+                    CTL1 = CTL2
+                End If
+            Loop
+            WriteLine(TextLine)
+        Else
+            WriteLine("File Does Not Exist")
+        End If
+        WriteLine(noOfIncreases)
+        ReadKey()
+    End Sub
+    Sub part2()
+        Dim total1, total2 As Integer
+        Dim allElements(2100) As Integer
+        Dim FILE_NAME As String = "N:\ADVENTOFCODEDAY1.txt"
+        If System.IO.File.Exists(FILE_NAME) = True Then
+            Dim objReader As New System.IO.StreamReader(FILE_NAME)
+            For i = 0 To 9999999
+                TextLine = objReader.ReadLine() & vbNewLine
+                Integer.TryParse(TextLine, CTL2)
+                allElements(i) = CTL2
+                If objReader.Peek() = -1 Then
+                    i = 9999999
+                Else
+                End If
+            Next
+        Else
+            WriteLine("File Does Not Exist")
+        End If
+        total1 = 629
+        For i = 1 To 2000
+            For j = 0 To 2
+                total2 += allElements(j + i)
+            Next
+            If total2 > total1 Then
+                noOfIncreases += 1
+            Else
+            End If
+            total1 = total2
+            total2 = 0
+        Next
+
+        WriteLine(noOfIncreases + 1)
+
+        ReadKey()
+    End Sub
+End Module
